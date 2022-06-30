@@ -1,0 +1,50 @@
+{% extends 'core/base1.html' %}
+{% block title %}Library{% endblock title %}
+
+{% block create %}
+<h1>Insert book into library</h1>
+<form action="" method="post" novalidate>
+    {% csrf_token %}
+    {% if form.non_field_errors %}
+        {% for error in form.non_field_errors  %}
+            <p class="er">{{error}}</p>
+        {% endfor %}
+    {% endif %}
+    {% for fm in form %}
+        {{fm.label_tag}} {{fm}} {{fm.errors|striptags}} <br> <br>
+    {% endfor %}
+    <input type="submit" value="create">
+</form>
+{% endblock create %}
+
+{% block content %}
+<h1>Library books details</h1>
+<table border="1px solid black" >
+    <th>Id</th>
+    <th >ISBN</th>
+    <th >TITLE</th>
+    <th >AUOTHOR</th>
+    <th >QUANTITY</th>
+    <th >PUBLISHER NAME</th>
+    <th>UPDATE</th>
+    <th>DELETE</th>
+    {% if bk %}
+        {% for books in bk %}
+        <tr >
+        <td >{{books.id}}</td>
+        <td >{{books.Isbn}}</td>
+        <td >{{books.Title}}</td>
+        <td >{{books.Author}}</td>
+        <td >{{books.Quantity}}</td>
+        <td >{{books.Publisher_name}}</td>
+        <td> <a href="{% url 'updatebook' books.id %}">Edit</a></td>
+        <td><form action="{% url 'deletebook' books.id %}" method="post"> {% csrf_token %} <input type="submit" value="Delete"> </form> </td>
+        </tr>
+        {% endfor %}
+    {% else %}
+        <h2>No data available to show</h2>
+    {% endif %}
+        
+    
+</table>
+{% endblock content %}

@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> {% block title %}{% endblock title %} </title>
+    <style>
+        * {
+          box-sizing: border-box;
+        }
+        
+        body {
+          font-family: Arial, Helvetica, sans-serif;
+        }
+        
+        /* Style the header */
+        header {
+          background-color: #456;
+          padding: 10px;
+          text-align: center;
+          font-size: 35px;
+          color: white;
+        }
+        
+        /* Create two columns/boxes that floats next to each other */
+        nav {
+          float: left;
+          width: 10%;
+          height: 400px; /* only for demonstration, should be removed */
+          background: #ccc;
+          padding: 20px;
+        }
+        
+        /* Style the list inside the menu */
+        nav ul {
+          list-style-type: none;
+          padding: 0;
+        }
+        
+        main {
+          float: left;
+          padding: 20px;
+          width: 90%;
+          background-color: #f1f1f1;
+          height: 400px; /* only for demonstration, should be removed */
+        }
+        
+        /* Clear floats after the columns */
+        section::after {
+          content: "";
+          display: table;
+          clear: both;
+        }
+        
+        /* Style the footer */
+        footer {
+          background-color: #456;
+          padding: 10px;
+          text-align: center;
+          color: white;
+        }
+        
+        /* Responsive layout - makes the two columns/boxes stack on top of each other instead of next to each other, on small screens */
+        @media (max-width: 600px) {
+          nav, main {
+            width: 100%;
+            height: auto;
+          }
+        }
+        </style>
+</head>
+<body>
+    <header>
+        <h2>Library management system</h2>
+      </header>
+      
+      <section>
+        <nav>
+          <ul>
+            {% if user.is_authenticated %}
+               <li><a href="{% url 'logout' %}">Logout</a></li>
+            {% else %}
+               <li><a href="{% url 'login' %}">Login</a></li>
+               <li><a href="{% url 'home' %}">Home</a></li>
+            {% endif %}
+            
+            
+          </ul>
+        </nav>
+        
+        <main>
+         {% block content %}
+         
+         {% endblock content %}
+        </main>
+      </section>
+      
+      <footer>
+        <p>Created@Rameshavgowda</p>
+      </footer> 
+</body>
+</html>

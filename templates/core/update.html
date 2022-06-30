@@ -1,0 +1,22 @@
+{% extends 'core/base1.html' %}
+{% block title %}Library{% endblock title %}
+
+{% block create %}
+
+{% endblock create %}
+
+{% block content %}
+<h1>Insert book into library</h1>
+<form action="" method="post" novalidate>
+    {% csrf_token %}
+    {% if form.non_field_errors %}
+        {% for error in form.non_field_errors  %}
+            <p>{{error}}</p>
+        {% endfor %}
+    {% endif %}
+    {% for fm in form %}
+        {{fm.label_tag}} {{fm}} {{fm.errors|striptags}} <br> <br>
+    {% endfor %}
+    <input type="submit" value="Update">
+</form>
+{% endblock content %}

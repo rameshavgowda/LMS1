@@ -1,0 +1,30 @@
+{% extends 'student/base1.html' %}
+{% block title %}Student{% endblock title %}
+
+{% block content %}
+<h1>Library books available for student</h1>
+<table border="1px solid black" >
+    <th>Id</th>
+    <th >ISBN</th>
+    <th >TITLE</th>
+    <th >AUOTHOR</th>
+    <th >QUANTITY</th>
+    <th >PUBLISHER NAME</th>
+    {% if bk %}
+        {% for books in bk %}
+        <tr >
+        <td >{{books.id}}</td>
+        <td >{{books.Isbn}}</td>
+        <td >{{books.Title}}</td>
+        <td >{{books.Author}}</td>
+        <td >{{books.Quantity}}</td>
+        <td >{{books.Publisher_name}}</td>
+        </tr>
+        {% endfor %}
+    {% else %}
+        <h2>No data available to show</h2>
+    {% endif %}
+        
+    
+</table>
+{% endblock content %}
